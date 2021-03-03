@@ -1,0 +1,23 @@
+decide on support for:
+Slack
+Viber
+Whatsapp
+Reddit
+Discord
+Messenger
+Telegram
+
+find python libs for the chosen support
+write boilerplate bots for each platform and deploy them; // this shows how the bot <==> platform works.
+decide and create a list of features we will be translating.
+design our interface (API) and write the core of our engine.
+write backends, each translating to one of the supported platforms.
+decide and write backend switching logic.
+  a) client code selects backend to run:
+    crosschatAPI.select_backend("Discord")
+  b) bot hoster selects backend to run:
+    hosting-admin@hosting-machine:~$ python bot_created_using_our_engine.py --platform Discord
+  c) engine runs all the backends at the same time, remembers from what library each request came. Then sends the respone to the correct backend.
+    this is very cool solution!. I kinda want to try doing it like that.
+    client code isn't going to know the platform from where a request comes. We will.
+    if a client bot had some memory, you could use it on one platform then continue conversation on different platform.
