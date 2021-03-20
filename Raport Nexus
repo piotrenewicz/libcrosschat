@@ -1,6 +1,10 @@
 Project1 CrossChatAPI
 https://docs.google.com/document/d/1zpDZvtjX3ydcXFCfNXvqqnqG8euPg-4w3EkMIW7IMNU/edit?usp=sharing
 
+git mv <old-name> <new-name>
+git update-index --assume-unchanged ./tokens/<platform>_config.py
+^ this command will stop git from trying to commit your token-file after filling it with a token.
+
 Raport1: 
 https://docs.google.com/document/d/19JHbKN6iWZMzZ-oVcULvK_CVhiFtA6QRwswl_lgwQtI/edit?usp=sharing
 
