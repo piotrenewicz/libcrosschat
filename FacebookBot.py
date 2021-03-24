@@ -29,7 +29,7 @@ def get_message(message):
     if message.lower() == "hello":
         return "Hi!"
     elif message.lower() == "what day is today?":
-        return "Today is Wendsday."
+        return "Today is today."
 
 def send_message(recipient_id, response):
     bot.send_text_message(recipient_id, response)
