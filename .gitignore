@@ -4,4 +4,5 @@ ngrok.exe
 *pycache*
 *vscode*
 *config*
+tokens/*
 todo
