@@ -23,8 +23,8 @@ def register_text_endpoint(_message_function):
 async def on_message(message: discord.message.Message):
     if message.author == client.user: return  # ignore self ## this fixes looping on response to self
     if message.author.bot: return  # ignore all bots ## this also fixes two bots replying to each other
-
-    response = text_function(message.content, str(message.author))
+    async with message.typing():
+        response = text_function(message.content, str(message.author))
     await message.channel.send(response)
 
 
