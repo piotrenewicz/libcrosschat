@@ -1,18 +1,39 @@
 import discord
-import tokens.discord_config
+try:
+    from tokens.discord_config import *
+except ModuleNotFoundError:
+    enable = False
 
-if tokens.discord_config.enable:
-    client = discord.Client()
 
-    @client.event
-    async def on_message(message: discord.message.Message):
-        print(message.content)
-        print(type(message))
-        if message.author == client.user: return  # ignore self ## this fixes looping on response to self
-        if message.author.bot: return  # ignore all bots ## this also fixes two bots replying to each other
-        await message.channel.send("responding to message " + message.content)
+text_function = None
+client = discord.Client()
 
-    if __name__ == "__main__":
-        pass  # in this version there is no main code for the bot to serve, testing response will be moved here later.
 
-    client.run(tokens.discord_config.TOKEN)  # this is probably blocking, will require threading.
+def run():
+    if enable:
+        client.run(TOKEN)  # this is probably blocking, will require threading.
+
+
+def register_text_endpoint(_message_function):
+    text_function = _message_function
+
+
+
+@client.event
+async def on_message(message: discord.message.Message):
+    if message.author == client.user: return  # ignore self ## this fixes looping on response to self
+    if message.author.bot: return  # ignore all bots ## this also fixes two bots replying to each other
+
+    response = text_function(message.content, message.author)
+    await message.channel.send(response)
+
+
+
+if __name__ == "__main__":
+    # in this version there is no main code for the bot to serve, testing response will be moved here later.
+    def testing_message_function(message, author):
+        response = "Hey " + author + "!\nDidn't see you coming there...\n U-uh what do you mean \""+message+"\"?"
+        return response
+
+    register_text_endpoint(testing_message_function)
+    run()
