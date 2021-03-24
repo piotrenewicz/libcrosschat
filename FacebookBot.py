@@ -1,7 +1,12 @@
 from flask import Flask, request
 from pymessenger import Bot
-from tokens.discord_config import ACCESS_TOKEN, VERIFY_TOKEN
+from tokens.facebook_config import ACCESS_TOKEN, VERIFY_TOKEN
 import os
+
+text_function = None
+def register_text_endpoint(_message_function):
+    global text_function
+    text_function = _message_function
 
 app = Flask(__name__)
 bot = Bot(ACCESS_TOKEN)
@@ -21,15 +26,13 @@ def verify_token():
                 if message.get('message'):
                     recipient_id = message['sender']['id']
                     if message['message'].get('text'):
-                        response_sent_text = get_message(message['message'].get('text'))
+                        response_sent_text = get_message(message['message'].get('text'), recipient_id)
                         send_message(recipient_id, response_sent_text)
     return "Message Processed"
 
-def get_message(message):
-    if message.lower() == "hello":
-        return "Hi!"
-    elif message.lower() == "what day is today?":
-        return "Today is today."
+def get_message(message, recipient_id):
+    print(type)
+    return text_function(message, recipient_id)
 
 def send_message(recipient_id, response):
     bot.send_text_message(recipient_id, response)
@@ -37,6 +40,6 @@ def send_message(recipient_id, response):
 
 
 
-if __name__ == "__main__":
-    os.system("ngrok.exe http 5000")
+
+def run():
     app.run(debug=True)
