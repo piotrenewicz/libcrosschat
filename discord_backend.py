@@ -15,8 +15,8 @@ def run():
 
 
 def register_text_endpoint(_message_function):
+    global text_function
     text_function = _message_function
-
 
 
 @client.event
@@ -26,7 +26,6 @@ async def on_message(message: discord.message.Message):
 
     response = text_function(message.content, message.author)
     await message.channel.send(response)
-
 
 
 if __name__ == "__main__":
