@@ -1,5 +1,6 @@
 /venv/
 /.idea/
+ngrok.exe
 *pycache*
 *vscode*
 *config*
