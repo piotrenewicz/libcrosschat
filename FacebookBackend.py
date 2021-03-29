@@ -1,6 +1,10 @@
 from flask import Flask, request
 from pymessenger import Bot
-from tokens.facebook_config import ACCESS_TOKEN, VERIFY_TOKEN
+try:
+    from tokens.facebook_config import ACCESS_TOKEN, VERIFY_TOKEN, enable
+except ModuleNotFoundError:
+    enable = False
+
 import os
 
 text_function = None
@@ -31,7 +35,7 @@ def verify_token():
     return "Message Processed"
 
 def get_message(message, recipient_id):
-    print(type)
+    # print(type)
     return text_function(message, recipient_id)
 
 def send_message(recipient_id, response):

@@ -1,6 +1,10 @@
 import telebot
 from time import sleep
-from telegram_config import *
+try:
+    from tokens.telegram_config import *
+except ModuleNotFoundError:
+    enable = False
+
 
 # Initialize bot with given token
 bot = telebot.TeleBot(TOKEN)
