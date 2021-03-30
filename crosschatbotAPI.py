@@ -27,11 +27,16 @@ def attach_text(function_being_decorated):
     return function_being_decorated
 
 
-def begin_backends():
+def begin_backends(blocking=True):
     for backend in all_backends:
         if backend.enable:
             all_threads.append(threading.Thread(target=backend.run, daemon=True))
 
     for thread in all_threads:
         thread.start()
+
+    print("Backends ready, waiting for interaction")
+    if blocking:
+        print("press enter to release wait")
+        input()
 
