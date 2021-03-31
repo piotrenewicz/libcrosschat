@@ -2,10 +2,9 @@ import threading
 
 import DiscordBackend
 import FacebookBackend
-# import TelegramBackend
+import TelegramBackend
 
-all_backends = [DiscordBackend, FacebookBackend]  # , TelegramBackend]
-# waiting on mykhailo to implement TelegramBackend.register_text_endpoint() and TelegramBackend.run()
+all_backends = [DiscordBackend, FacebookBackend, TelegramBackend]
 all_threads = []
 
 
@@ -30,7 +29,8 @@ def attach_text(function_being_decorated):
 def begin_backends(blocking=True):
     for backend in all_backends:
         if backend.enable:
-            all_threads.append(threading.Thread(target=backend.run, daemon=True))
+            all_threads.append(threading.Thread(
+                target=backend.run, daemon=True))
 
     for thread in all_threads:
         thread.start()
@@ -39,4 +39,3 @@ def begin_backends(blocking=True):
     if blocking:
         print("press enter to release wait")
         input()
-
