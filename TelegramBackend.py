@@ -6,7 +6,6 @@ try:
 except ModuleNotFoundError:
     enable = False
 
-
 # Initialize bot with given token
 bot = telebot.TeleBot(TOKEN)
 

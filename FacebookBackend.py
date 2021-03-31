@@ -5,13 +5,23 @@ try:
 except ModuleNotFoundError:
     enable = False
 
-text_function = None
+
+def unconfigured(*args, **kwargs):
+    return
+
+
+text_function = unconfigured
+
+
 def register_text_endpoint(_message_function):
     global text_function
     text_function = _message_function
 
+
 app = Flask(__name__)
-bot = Bot(ACCESS_TOKEN)
+if enable:
+    bot = Bot(ACCESS_TOKEN)
+
 
 @app.route('/conversion_layer', methods=['POST', 'GET'])
 def verify_token():
@@ -21,6 +31,8 @@ def verify_token():
             return request.args.get("hub.challenge")
         return "Invalid verification token"
     else:
+        if text_function is unconfigured:
+            return "Message Processed"
         output = request.get_json()
         for event in output['entry']:
             messaging = event['messaging']
