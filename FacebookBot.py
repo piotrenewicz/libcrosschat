@@ -38,8 +38,5 @@ def send_message(recipient_id, response):
     bot.send_text_message(recipient_id, response)
     return "success"
 
-
-
-
 def run():
     app.run(debug=True)
