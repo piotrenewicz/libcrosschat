@@ -5,8 +5,6 @@ try:
 except ModuleNotFoundError:
     enable = False
 
-import os
-
 text_function = None
 def register_text_endpoint(_message_function):
     global text_function
@@ -43,4 +41,4 @@ def send_message(recipient_id, response):
     return "success"
 
 def run():
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
