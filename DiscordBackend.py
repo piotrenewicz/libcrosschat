@@ -68,19 +68,34 @@ async def dispatch_nagger(message: discord.message.Message):
     def nagger(content):
         perform_nag(message.channel, content)
 
-    await loop.run_in_executor(None, nagger_function, nagger)
+    await loop.run_in_executor(None, nagger_function, nagger, message.content[len(prefix):], str(message.author))
 
 
 def perform_nag(channel: discord.message.Message.channel, content):
-    asyncio.run(channel.send(content))
+    asyncio.run_coroutine_threadsafe(channel.send(content), loop)
 
 
 if __name__ == "__main__":
-    # in this version there is no main code for the bot to serve, testing response will be moved here later.
+    import time
+
     def testing_message_function(message, author):
         response = "Hey " + author + "!\nDidn't see you coming there...\n U-uh what do you mean \"" + message + "\"?"
         return response
 
+    def testing_nagging_function(nagger, message, author):
+        time.sleep(2)
+        nagger("oh no "+author+" you've become a victim to a nagger function!")
+        time.sleep(1)
+        nagger("and it was just sending that \n\""+message+"\"\n that got you here")
+        time.sleep(5)
+        nagger("Now now, don't #panik.\nYou're lucky, this is nagger is only going to count up to 60 before giving up!")
+        time.sleep(10)
+        nagger("oh here it goes...")
+        for i in range(60):
+            nagger(str(i+1))
+            time.sleep(1)
 
-    register_text_endpoint(testing_message_function)
+
+    # register_text_endpoint(testing_message_function)
+    register_nagger_endpoint(testing_nagging_function)
     run()
