@@ -78,11 +78,15 @@ def perform_nag(channel: discord.message.Message.channel, content):
 if __name__ == "__main__":
     import time
 
-    def testing_message_function(message, author):
+    def testing_message_function(message: str, author: str):
+        if not message.startswith("text"):
+            return
         response = "Hey " + author + "!\nDidn't see you coming there...\n U-uh what do you mean \"" + message + "\"?"
         return response
 
-    def testing_nagging_function(nagger, message, author):
+    def testing_nagging_function(nagger, message: str, author: str):
+        if not message.startswith("nagger"):
+            return
         time.sleep(2)
         nagger("oh no "+author+" you've become a victim to a nagger function!")
         time.sleep(1)
@@ -96,6 +100,6 @@ if __name__ == "__main__":
             time.sleep(1)
 
 
-    # register_text_endpoint(testing_message_function)
+    register_text_endpoint(testing_message_function)
     register_nagger_endpoint(testing_nagging_function)
     run()
