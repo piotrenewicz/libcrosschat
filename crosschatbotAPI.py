@@ -8,20 +8,16 @@ all_backends = [DiscordBackend, FacebookBackend, TelegramBackend]
 all_threads = []
 
 
-user_text_function = NotImplementedError
-
-
-def text_handler(incoming_message: str, author: str):
-    response = user_text_function(incoming_message, author)
-    return response
-
-
 def attach_text(function_being_decorated):
-    global user_text_function
-    user_text_function = function_being_decorated
-
     for backend in all_backends:
-        backend.register_text_endpoint(text_handler)
+        backend.register_text_endpoint(function_being_decorated)
+
+    return function_being_decorated
+
+
+def attach_nagger(function_being_decorated):
+    for backend in all_backends:
+        backend.register_nagger_endpoint(function_being_decorated)
 
     return function_being_decorated
 
