@@ -4,7 +4,7 @@ import DiscordBackend
 import FacebookBackend
 import TelegramBackend
 
-all_backends = [DiscordBackend, FacebookBackend, TelegramBackend]
+all_backends = [DiscordBackend]  # , FacebookBackend, TelegramBackend]
 all_threads = []
 
 
@@ -15,9 +15,10 @@ def attach_text(function_being_decorated):
     return function_being_decorated
 
 
-def attach_nagger(function_being_decorated):
+# def full_example("Platform", room_id, message, author, send)
+def attach_full(function_being_decorated):
     for backend in all_backends:
-        backend.register_nagger_endpoint(function_being_decorated)
+        backend.register_full_endpoint(function_being_decorated)
 
     return function_being_decorated
 

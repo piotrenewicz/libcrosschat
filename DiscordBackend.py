@@ -23,7 +23,7 @@ def unconfigured(*args, **kwargs):
 
 
 text_function = unconfigured
-nagger_function = unconfigured
+full_function = unconfigured
 
 
 def register_text_endpoint(_text_function):
@@ -31,9 +31,9 @@ def register_text_endpoint(_text_function):
     text_function = _text_function
 
 
-def register_nagger_endpoint(_nagger_function):
-    global nagger_function
-    nagger_function = _nagger_function
+def register_full_endpoint(_full_function):
+    global full_function
+    full_function = _full_function
 
 
 @client.event
@@ -46,14 +46,13 @@ async def on_message(message: discord.message.Message):
         # ignores when message doesn't match the prefix defined in discord_config.py
         return
 
-    await dispatch_text(message)
-    await dispatch_nagger(message)
+    if text_function is not unconfigured:
+        await dispatch_text(message)
+    if full_function is not unconfigured:
+        await dispatch_full(message)
 
 
 async def dispatch_text(message: discord.message.Message):
-    if text_function is unconfigured:
-        return
-
     async with message.channel.typing():
         response = await loop.run_in_executor(None, text_function, message.content[len(prefix):], str(message.author))
     if response is None:
@@ -61,14 +60,11 @@ async def dispatch_text(message: discord.message.Message):
     await message.channel.send(response)
 
 
-async def dispatch_nagger(message: discord.message.Message):
-    if nagger_function is unconfigured:
-        return
-
+async def dispatch_full(message: discord.message.Message):
     def nagger(content):
         perform_nag(message.channel, content)
 
-    await loop.run_in_executor(None, nagger_function, nagger, message.content[len(prefix):], str(message.author))
+    await loop.run_in_executor(None, full_function, "DC", message.channel.id, message.content[len(prefix):], str(message.author), nagger)
 
 
 def perform_nag(channel: discord.message.Message.channel, content):
@@ -84,7 +80,7 @@ if __name__ == "__main__":
         response = "Hey " + author + "!\nDidn't see you coming there...\n U-uh what do you mean \"" + message + "\"?"
         return response
 
-    def testing_nagging_function(nagger, message: str, author: str):
+    def testing_nagging_function(platform, room_id, message: str, author: str, nagger):
         if not message.startswith("nagger"):
             return
         time.sleep(2)
@@ -101,5 +97,5 @@ if __name__ == "__main__":
 
 
     register_text_endpoint(testing_message_function)
-    register_nagger_endpoint(testing_nagging_function)
+    register_full_endpoint(testing_nagging_function)
     run()
