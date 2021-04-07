@@ -4,7 +4,7 @@ import DiscordBackend
 import FacebookBackend
 import TelegramBackend
 
-all_backends = [DiscordBackend]  # , FacebookBackend, TelegramBackend]
+all_backends = [DiscordBackend, FacebookBackend, TelegramBackend]
 all_threads = []
 
 
