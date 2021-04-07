@@ -52,21 +52,20 @@ def verify_token():
 
 def process_message(message, recipient_id):
     author_data = bot.get_user_info(recipient_id)
-    print(author_data)
+    author_name = author_data['first_name'] + ' ' + author_data['last_name']
 
     if full_function is not unconfigured:
         def responder(response):
-            send_message(author_data['first_name'] + ' ' + author_data['last_name'], response)
-        full_function(("FB", recipient_id), message, recipient_id, responder)
+            send_message(recipient_id, response)
+        full_function(("FB", recipient_id), message, author_name, responder)
 
     if text_function is not unconfigured:
-        quick_response = text_function(message, recipient_id)
+        quick_response = text_function(message, author_name)
         send_message(recipient_id, quick_response)
 
 
 def send_message(recipient_id, response):
-    author_data = bot.get_user_info(recipient_id)
-    bot.send_text_message(recipient_id, "Hello " + author_data['first_name'] + ' ' + author_data['last_name'])
+    bot.send_text_message(recipient_id, response)
     return "success"
 
 
