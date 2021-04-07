@@ -80,7 +80,7 @@ if __name__ == "__main__":
         response = "Hey " + author + "!\nDidn't see you coming there...\n U-uh what do you mean \"" + message + "\"?"
         return response
 
-    def testing_nagging_function(platform, room_id, message: str, author: str, nagger):
+    def testing_nagging_function(chat_id, message: str, author: str, nagger):
         if not message.startswith("nagger"):
             return
         time.sleep(2)
