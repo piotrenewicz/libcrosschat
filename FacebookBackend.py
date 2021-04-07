@@ -1,5 +1,5 @@
 from flask import Flask, request
-from pymessenger3 import Bot
+from pymessenger import Bot
 try:
     from tokens.facebook_config import ACCESS_TOKEN, VERIFY_TOKEN, enable
 except ModuleNotFoundError:
