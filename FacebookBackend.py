@@ -43,6 +43,7 @@ def verify_token():
             for message in messaging:
                 if message.get('message'):
                     recipient_id = message['sender']['id']
+                    
                     if message['message'].get('text'):
                         process_message(message['message'].get('text'), recipient_id)
 
@@ -55,7 +56,7 @@ def process_message(message, recipient_id):
 
     if full_function is not unconfigured:
         def responder(response):
-            send_message(recipient_id, response)
+            send_message(author_data['first_name'] + ' ' + author_data['last_name'], response)
         full_function(("FB", recipient_id), message, recipient_id, responder)
 
     if text_function is not unconfigured:
@@ -64,7 +65,8 @@ def process_message(message, recipient_id):
 
 
 def send_message(recipient_id, response):
-    bot.send_text_message(recipient_id, response)
+    author_data = bot.get_user_info(recipient_id)
+    bot.send_text_message(recipient_id, "Hello " + author_data['first_name'] + ' ' + author_data['last_name'])
     return "success"
 
 
