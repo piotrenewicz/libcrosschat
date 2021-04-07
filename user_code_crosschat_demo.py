@@ -103,14 +103,13 @@ def send_to_crosschat(message, crosschat_name, except_channel):
 
 
 @crosschatbotAPI.attach_full
-def working_with_full_power(platform: str, room_id, message: str, author: str, send):
-    channel = (platform, room_id)
+def working_with_full_power(channel_id, message: str, author: str, send):
     if message.startswith(summon):
-        send(parse_command(message[len(summon):], author, channel, send))
+        send(parse_command(message[len(summon):], author, channel_id, send))
         return
 
-    if channel in rooms:
-        send_to_crosschat("["+author+"]:\n"+message, rooms[channel], channel)
+    if channel_id in rooms:
+        send_to_crosschat("["+author+"]:\n"+message, rooms[channel_id], channel_id)
 
 
 crosschatbotAPI.begin_backends()

@@ -11,11 +11,17 @@ def unconfigured(*args, **kwargs):
 
 
 text_function = unconfigured
+full_function = unconfigured
 
 
 def register_text_endpoint(_message_function):
     global text_function
     text_function = _message_function
+
+
+def register_full_endpoint(_full_function):
+    global full_function
+    full_function = _full_function
 
 
 app = Flask(__name__)
@@ -31,8 +37,6 @@ def verify_token():
             return request.args.get("hub.challenge")
         return "Invalid verification token"
     else:
-        if text_function is unconfigured:
-            return "Message Processed"
         output = request.get_json()
         for event in output['entry']:
             messaging = event['messaging']
@@ -40,17 +44,26 @@ def verify_token():
                 if message.get('message'):
                     recipient_id = message['sender']['id']
                     if message['message'].get('text'):
-                        response_sent_text = get_message(message['message'].get('text'), recipient_id)
-                        send_message(recipient_id, response_sent_text)
+                        process_message(message['message'].get('text'), recipient_id)
+
     return "Message Processed"
 
-def get_message(message, recipient_id):
-    # print(type)
-    return text_function(message, recipient_id)
+
+def process_message(message, recipient_id):
+    if full_function is not unconfigured:
+        def responder(response):
+            send_message(recipient_id, response)
+        full_function(("FB", recipient_id), message, recipient_id, responder)
+
+    if text_function is not unconfigured:
+        quick_response = text_function(message, recipient_id)
+        send_message(recipient_id, quick_response)
+
 
 def send_message(recipient_id, response):
     bot.send_text_message(recipient_id, response)
     return "success"
+
 
 def run():
     app.run(debug=True, use_reloader=False)

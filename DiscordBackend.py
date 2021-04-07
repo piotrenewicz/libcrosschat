@@ -64,7 +64,7 @@ async def dispatch_full(message: discord.message.Message):
     def nagger(content):
         perform_nag(message.channel, content)
 
-    await loop.run_in_executor(None, full_function, "DC", message.channel.id, message.content[len(prefix):], str(message.author), nagger)
+    await loop.run_in_executor(None, full_function, ("DC", message.channel.id), message.content[len(prefix):], str(message.author), nagger)
 
 
 def perform_nag(channel: discord.message.Message.channel, content):
