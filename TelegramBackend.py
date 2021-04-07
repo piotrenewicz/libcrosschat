@@ -45,7 +45,7 @@ if enable:
         if full_function is not unconfigured:
             def responder(response):
                 bot.send_message(message.chat.id, response)
-            full_function(("TG", message.chat.id), message.text, message.chat.first_name+" "+message.chat.last_name, responder)
+            full_function(("TG", message.chat.id), message.text, message.chat.first_name+" "+message.chat.last_name, responder  )
 
 
 # Start bot's polling
