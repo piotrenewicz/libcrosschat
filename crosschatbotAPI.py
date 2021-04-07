@@ -32,7 +32,15 @@ def begin_backends(blocking=True):
     for thread in all_threads:
         thread.start()
 
-    print("Backends ready, waiting for interaction")
+    if len(all_threads) == 0:
+        print("No backends are configured to start!\n"
+              "Example configurations are located in crosschatbotAPI/tokens_template/\n"
+              "copy them to crosschatbotAPI/tokens/ and edit with your tokens and preferences\n"
+              "When you're done remember to set enable=True for the backends you wish to start!")
+        return None
+
+    print("Starting " + str(len(all_threads)) + " backends")
     if blocking:
-        print("press enter to release wait")
+        print("Blocking the MainThread, to prevent program close. \n"
+              "Press enter to release the MainThread")
         input()
