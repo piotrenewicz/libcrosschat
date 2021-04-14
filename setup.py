@@ -17,4 +17,5 @@ setup(
     keywords=['chatbot', 'chatbots', 'chat-bot', 'chatbot-framework', 'discord', 'telegram', 'facebook messenger', 'python', 'bot'],
     classifiers=[],
 )
+# https://github.com/davidchua/pymessenger/archive/master.tar.gz#egg=pymessenger
 
