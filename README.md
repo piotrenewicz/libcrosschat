@@ -17,12 +17,14 @@ Discord, Facebook Messenger, Telegram.
 <a name="whaaa??"/>
 
 ## Introduction
-filler
+This project was developed as part of team programming class, in Applied Informatics degree at the University of Silesia.  
 
-filler
+The aim of this project is to enable a single chatbot implementation and deployment to work with multiple chat platforms.  
+Write your bot once, and have it talk to humans through any of the supported chats.  
 
-filler
-filler
+This is achieved by running several normal "bots" *(reffered to as **backends**)* concurrently with multithreading  
+and having each backend call your function when it is asked something. 
+
 
 <a name="howinstall"/>
 
