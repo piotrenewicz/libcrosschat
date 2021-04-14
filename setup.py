@@ -5,8 +5,6 @@ req_path = os.path.join(os.path.dirname(__file__), "requirements.txt")
 with open(req_path) as f:
     requirements = f.read().splitlines()
 
-print(requirements)
-exit()
 setup(
     name='libcrosschat',
     packages=['libcrosschat'],
