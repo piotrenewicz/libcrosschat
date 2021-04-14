@@ -7,7 +7,7 @@ with open(req_path) as f:
 
 setup(
     name='libcrosschat',
-    packages=['libcrosschat'],
+    # packages=['libcrosschat'],
     version='1.0.0',
     install_requires=requirements,
     description="Python module to make chatbots for multiple Platforms",
