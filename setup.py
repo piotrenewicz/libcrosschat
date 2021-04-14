@@ -19,3 +19,5 @@ setup(
     keywords=['chatbot', 'chatbots', 'chat-bot', 'chatbot-framework', 'discord', 'telegram', 'facebook messenger', 'python', 'bot'],
     classifiers=[],
 )
+
+#git+https://github.com/davidchua/pymessenger.git#egg=pymessenger
