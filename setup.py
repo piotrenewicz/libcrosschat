@@ -18,4 +18,3 @@ setup(
     classifiers=[],
 )
 
-#git+https://github.com/davidchua/pymessenger.git#egg=pymessenger
