@@ -1,7 +1,7 @@
 from setuptools import setup
 import os
 
-req_path = os.path.join(os.path.dirname(__file__), "'requirements.txt'")
+req_path = os.path.join(os.path.dirname(__file__), "requirements.txt")
 with open(req_path) as f:
     requirements = f.read().splitlines()
 
