@@ -143,4 +143,18 @@ send me an email at piotr.morel@smcebi.edu.pl and i will try to write it up.
 <a name="devlog"/>
 
 ## DevLog
+Project1 CrossChatAPI
+https://docs.google.com/document/d/1zpDZvtjX3ydcXFCfNXvqqnqG8euPg-4w3EkMIW7IMNU/edit?usp=sharing
+
+Raport1: 
+https://docs.google.com/document/d/19JHbKN6iWZMzZ-oVcULvK_CVhiFtA6QRwswl_lgwQtI/edit?usp=sharing
+
+Raport2:
+https://docs.google.com/document/d/1ALs_YY2FK5IWoJeu-euSnxmaTQGFXvznOSbRwDsu-G0/edit?usp=sharing
+
+Raport3:
+https://docs.google.com/document/d/1y9x4IXPeZ7VToYJSxPI3DLr-vT-dxNGZvBKSU-QHxg4/edit?usp=sharing
+
+Raport4:
+https://docs.google.com/document/d/1_SSip9HMZ19U9odGVbw4FVIhNUQdjERTRn4m0cQWDnc/edit?usp=sharing
 
