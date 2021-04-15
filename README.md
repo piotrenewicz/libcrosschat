@@ -38,7 +38,7 @@ This is not available through pip, maybe it will be when i figure out how to rel
 `source venv/bin/activate`
 
 3.get this package   
-`pip install git+https://github.com/piotrenewicz/libcrosschatrepo.git#egg=libcrosschat`
+`pip install -e git+https://github.com/piotrenewicz/libcrosschatrepo.git#egg=libcrosschat`
 
 4.get pymessenger (auto setup installs a bugged version)  
 `pip install git+https://github.com/davidchua/pymessenger.git#egg=pymessenger`
@@ -107,80 +107,40 @@ Lastly you need to pass control into the backends, but depending on what you're 
 For this reason you can call `crosschatbotAPI.begin_backends(blocking=False)`.  
 Just like before this will create threads for backends, and set things in motion. But with blocking set to False, it will not lock the main thread, and instead return control to your code. You'll need to handle keeping the thread alive as ending the main thread stops everything.
 
-If you don't need control over main thread you can just call `crosschatbotAPI.begin_backends()` as before.
+If you don't need control over main thread you can just call `crosschatbotAPI.begin_backends()` as before.  
 For an extensive demo of capabilities of this function see:`user_code_crosschat_demo.py`
 
 
 <a name="howdeploy"/>
 
 ## Steps to get your bot on all the supported platforms.
-filler
+Before your code can be tested, it needs to make a connection with a platform.  
+Each platform has it's own procedure for registering new bots, google will help you with getting information how to set up a bot on a given platform.
 
-filler
+Once you have followed the 3rd party procedure, you should have a token, or in some cases a few.  
+Take a look into `./venv/src/libcrosschat/tokens_template/`  
+There you can find example backend configurations; copy `<platform>_config.py` files for the platforms you want to target into:
+`./venv/src/libcrosschat/tokens/<platform>_config.py`.  
+Next set the token variables in each file to your tokens, obtained from a platform.  
+Review and personalise any additional settings you can make in those config files.  
+When you're done remember to set `enable=True` for each backend that you want to use!  
 
-filler
-filler
-filler
+After doing this configuration running your code should result in bots you've registerd coming online and being ready to pass messages!
 
-filler
+In the case of Facebook bots, you'll see a website start on http://localhost:5000.  
+During development you'll want to use a service like ngrok with command `ngrok https 5000`, to tunnel this to a https enabled address, and then point facebook to the address ngrok gives you.
+For a production deployment, you'll want to push your bot to a server accessible from the internet, with SSL and HTTPS enabled. You can then point facebook to that server.
 
-filler
-filler
-filler
-
-filler
-
-filler
-filler
-filler
-
-filler
-
-filler
-filler
 
 <a name="moar_platforms"/>
 
 ## Guide to creating a backend, and contributing to this project.
-filler
+Section to be written.
 
-filler
-
-filler
-filler
-filler
-
-filler
-
-filler
-filler
-filler
-
-filler
-
-filler
-filler
+If you want to create a backend for this, and it's still not written;  
+send me an email at piotr.morel@smcebi.edu.pl and i will try to write it up. 
 
 <a name="devlog"/>
 
 ## DevLog
-filler
-
-filler
-
-filler
-filler
-filler
-
-filler
-
-filler
-filler
-
-
-%peter
-
-%konrad
-
-%mykhailo 
 
